@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("borrowForm");
   const msg = document.getElementById("msg");
 
-  // Carregar catálogo de livros do Google Sheets
   async function carregarLivros() {
     try {
       const res = await fetch(GAS_WEBAPP_URL);
@@ -14,13 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
       livroSelect.innerHTML = "";
 
       livros.forEach(l => {
-        // Exibe cada livro no catálogo
+        const estaDisponivel = String(l.disponivel).toLowerCase() === "true";
+
         const div = document.createElement("div");
-        div.textContent = `${l.id} - ${l.titulo} (${l.autor}) [${(l.disponivel === true || l.disponivel === "TRUE") ? "Disponível" : "Alugado"}]`;
+        div.className = "book-card";
+        div.innerHTML = `
+          <h3>${l.titulo}</h3>
+          <p><strong>Autor:</strong> ${l.autor}</p>
+          ${l.capa ? `<img src="${l.capa}" alt="Capa de ${l.titulo}"/>` : ""}
+          <p><strong>Status:</strong> ${estaDisponivel ? "Disponível" : "Alugado"}</p>
+        `;
         catalog.appendChild(div);
 
-        // Só adiciona no select se estiver disponível
-        if (l.disponivel === true || l.disponivel === "TRUE") {
+        if (estaDisponivel) {
           const opt = document.createElement("option");
           opt.value = l.id;
           opt.textContent = `${l.id} - ${l.titulo}`;
@@ -31,22 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!livroSelect.options.length) {
         const opt = document.createElement("option");
         opt.textContent = "Nenhum livro disponível";
+        opt.disabled = true;
         livroSelect.appendChild(opt);
       }
     } catch (error) {
       console.error("Erro ao carregar livros:", error);
-      catalog.innerHTML = "<p>Erro ao carregar catálogo. Tente novamente.</p>";
+      catalog.innerHTML = "<p style='color:red;'>Erro ao carregar catálogo. Tente novamente.</p>";
     }
   }
 
-  // Enviar pedido de empréstimo
   form.addEventListener("submit", async e => {
     e.preventDefault();
-
-    if (!livroSelect.value) {
-      msg.textContent = "Nenhum livro disponível para empréstimo.";
-      return;
-    }
 
     const body = {
       action: "borrow",
@@ -80,6 +80,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Carregar livros ao iniciar
-  carregarLivros();
+  carregarLivros(); // Carrega ao iniciar
 });

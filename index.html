@@ -85,6 +85,17 @@
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    .book-card {
+      background: var(--branco);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .book-card img {
+      max-width: 120px;
+      margin-top: 0.5rem;
+    }
     form {
       display: flex;
       flex-direction: column;
@@ -117,14 +128,12 @@
   </style>
 </head>
 <body>
-  <!-- Hero principal -->
   <header class="hero">
     <h1>Biblioteca CREIO</h1>
     <p>É digital, é gratuita, onde você estiver</p>
     <a href="#emprestar" class="btn-primary">Alugar agora</a>
   </header>
 
-  <!-- Menu -->
   <nav class="menu">
     <ul>
       <li><a href="#catalogo">Catálogo</a></li>
@@ -134,7 +143,6 @@
     </ul>
   </nav>
 
-  <!-- Categorias -->
   <section id="categorias">
     <h2>Categorias</h2>
     <div class="categories">
@@ -145,13 +153,11 @@
     </div>
   </section>
 
-  <!-- Catálogo -->
   <section id="catalogo">
     <h2>Catálogo de Livros</h2>
     <div id="catalog"></div>
   </section>
 
-  <!-- Formulário de Empréstimo -->
   <section id="emprestar">
     <h2>Alugar Livro</h2>
     <form id="borrowForm">
@@ -159,38 +165,34 @@
         <input type="text" id="nome" required/>
       </label>
       <label>Livro (ID):
-        <select id="livroSelect"></select>
+        <select id="livroSelect" required></select>
       </label>
       <label>Dias:
-        <input type="number" id="dias" min="1" value="7"/>
+        <input type="number" id="dias" min="1" value="7" required/>
       </label>
       <button type="submit">Alugar</button>
     </form>
     <div id="msg"></div>
   </section>
 
-  <!-- Sobre -->
   <section id="sobre">
     <h2>Sobre a Biblioteca CREIO</h2>
     <p>A Biblioteca CREIO é um projeto comunitário da Assembleia de Deus Belém - Cidade Ademar. 
        Nosso objetivo é proporcionar acesso gratuito a livros cristãos, fortalecendo a fé e o conhecimento.</p>
   </section>
 
-  <!-- Contato -->
   <section id="contato">
     <h2>Contato</h2>
     <p>📍 Local: Cidade Ademar - São Paulo/SP</p>
     <p>📧 Email: contato@bibliotecacreio.org</p>
   </section>
 
-  <!-- Rodapé -->
   <footer>
     <p>Biblioteca CREIO — Todos os direitos reservados © 2025</p>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxNeKUKPcnpg2wvgf99XlMMZcWGJuzXHr_oBQTdKQe2fv_6fPM9gADYxAgQi4dzQz_N0Q/exec";
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec";
   </script>
   <script src="app.js"></script>
 </body>
