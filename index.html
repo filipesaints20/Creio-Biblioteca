@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Biblioteca CREIO</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --roxo-creio: #5B2C82;
@@ -23,6 +23,10 @@
       color: var(--branco);
       text-align: center;
       padding: 3rem 1rem;
+    }
+    header.hero img {
+      max-height: 80px;
+      margin-bottom: 1rem;
     }
     header.hero h1 {
       font-size: 2.5rem;
@@ -65,7 +69,7 @@
     }
     section {
       padding: 2rem 1rem;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
     }
     section h2 {
@@ -85,16 +89,37 @@
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    #catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
     .book-card {
       background: var(--branco);
-      padding: 1rem;
-      margin: 1rem 0;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .book-card:hover {
+      transform: scale(1.02);
     }
     .book-card img {
-      max-width: 120px;
-      margin-top: 0.5rem;
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .book-card h3 {
+      font-size: 1.1rem;
+      color: var(--roxo-creio);
+      margin: 0.5rem 0;
+    }
+    .book-card p {
+      font-size: 0.9rem;
+      margin: 0.3rem 0;
     }
     form {
       display: flex;
@@ -129,8 +154,9 @@
 </head>
 <body>
   <header class="hero">
+    <img src="logo-creio.png" alt="Logo CREIO Belém">
     <h1>Biblioteca CREIO</h1>
-    <p>É digital, é gratuita, onde você estiver</p>
+    <p>“A fé vem pelo ouvir, e o ouvir pela Palavra de Deus” — Romanos 10:17</p>
     <a href="#emprestar" class="btn-primary">Alugar agora</a>
   </header>
 
@@ -192,8 +218,9 @@
   </footer>
 
   <script>
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxNeKUKPcnpg2wvgf99XlMMZcWGJuzXHr_oBQTdKQe2fv_6fPM9gADYxAgQi4dzQz_N0Q/exec";
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/SEU_ID_DO_WEBAPP/exec";
   </script>
   <script src="app.js"></script>
 </body>
 </html>
+

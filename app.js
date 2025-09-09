@@ -15,16 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
       livros.forEach(l => {
         const estaDisponivel = String(l.disponivel).toLowerCase() === "true";
 
+        // Cria card visual
         const div = document.createElement("div");
         div.className = "book-card";
         div.innerHTML = `
+          ${l.capa ? `<img src="${l.capa}" alt="Capa de ${l.titulo}"/>` : ""}
           <h3>${l.titulo}</h3>
           <p><strong>Autor:</strong> ${l.autor}</p>
-          ${l.capa ? `<img src="${l.capa}" alt="Capa de ${l.titulo}"/>` : ""}
-          <p><strong>Status:</strong> ${estaDisponivel ? "Disponível" : "Alugado"}</p>
+          <p><strong>Status:</strong> ${estaDisponivel ? "📗 Disponível" : "📕 Alugado"}</p>
         `;
         catalog.appendChild(div);
 
+        // Adiciona ao select se disponível
         if (estaDisponivel) {
           const opt = document.createElement("option");
           opt.value = l.id;
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      // Se nenhum livro disponível
       if (!livroSelect.options.length) {
         const opt = document.createElement("option");
         opt.textContent = "Nenhum livro disponível";
@@ -80,5 +83,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  carregarLivros(); // Carrega ao iniciar
+  carregarLivros(); // Inicializa catálogo ao carregar página
 });
