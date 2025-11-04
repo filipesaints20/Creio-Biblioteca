@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="Biblioteca CREIO - Acesso gratuito a livros cristãos para fortalecer sua fé e conhecimento"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Biblioteca CREIO - Acesso gratuito a livros cristãos para fortalecer sua fé e conhecimento">
   <title>Biblioteca CREIO - Assembleia de Deus Belém</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  <header class="hero">
-    <img src="logo-creio.png" alt="Logo CREIO Belém" width="90" height="90">
-    <h1>Biblioteca CREIO</h1>
-    <p>"A fé vem pelo ouvir, e o ouvir pela Palavra de Deus" — Romanos 10:17</p>
-    <a href="#emprestar" class="btn-primary">Alugar agora</a>
-  </header>
+  <div id="app"></div>
 
-  <nav class="menu" role="navigation" aria-label="Menu principal">
-    <ul>
-      <li><a href="#catalogo">Catálogo</a></li>
-      <li><a href="#categorias">Categorias</a></li>
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-  </nav>
+  <main class="container" style="padding: 3rem 1rem;">
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">Bem-vindo à Biblioteca CREIO</h1>
+        <p class="hero__subtitle">"A fé vem pelo ouvir, e o ouvir pela Palavra de Deus" — Romanos 10:17</p>
+        <p class="hero__description">Acesso gratuito a uma vasta coleção de livros cristãos para fortalecer sua jornada de fé.</p>
+        <div class="hero__actions">
+          <a href="pages/catalog.html" class="btn btn-primary">Explorar Catálogo</a>
+          <a href="pages/contact.html" class="btn btn-secondary">Entre em Contato</a>
+        </div>
+      </div>
+    </section>
 
-  <section id="categorias">
-    <h2>Categorias</h2>
-    <div class="categories">
-      <div class="category-card">Literatura Cristã</div>
-      <div class="category-card">Devocionais</div>
-      <div class="category-card">Teologia</div>
-      <div class="category-card">Infantil</div>
-    </div>
-  </section>
+    <section class="features" style="margin-top: 4rem;">
+      <h2 style="text-align: center; color: var(--roxo-creio); margin-bottom: 2rem; font-size: 2rem;">Por que escolher a Biblioteca CREIO?</h2>
+      <div class="grid grid--3col">
+        <div class="feature-card">
+          <div class="feature-card__icon">📚</div>
+          <h3 class="feature-card__title">Amplo Acervo</h3>
+          <p class="feature-card__description">Centenas de livros cristãos, devocionais, teologia e literatura infantil.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🆓</div>
+          <h3 class="feature-card__title">Totalmente Gratuito</h3>
+          <p class="feature-card__description">Sem custos de inscrição ou empréstimo. Acesso aberto a toda comunidade.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">⏱️</div>
+          <h3 class="feature-card__title">Flexível</h3>
+          <p class="feature-card__description">Escolha o período de empréstimo que melhor se adequa a você.</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="catalogo">
-    <h2>Catálogo de Livros</h2>
-    <div id="catalog" role="list"></div>
-  </section>
+    <section class="categories-preview" style="margin-top: 4rem;">
+      <h2 style="text-align: center; color: var(--roxo-creio); margin-bottom: 2rem; font-size: 2rem;">Categorias Principais</h2>
+      <div class="grid grid--4col">
+        <a href="pages/categories.html" class="category-preview-card">
+          <div class="category-preview-card__icon">📖</div>
+          <h3>Literatura Cristã</h3>
+        </a>
+        <a href="pages/categories.html" class="category-preview-card">
+          <div class="category-preview-card__icon">🙏</div>
+          <h3>Devocionais</h3>
+        </a>
+        <a href="pages/categories.html" class="category-preview-card">
+          <div class="category-preview-card__icon">✝️</div>
+          <h3>Teologia</h3>
+        </a>
+        <a href="pages/categories.html" class="category-preview-card">
+          <div class="category-preview-card__icon">👶</div>
+          <h3>Infantil</h3>
+        </a>
+      </div>
+    </section>
 
-  <section id="emprestar">
-    <h2>Alugar Livro</h2>
-    <form id="borrowForm">
-      <label for="nome">
-        Nome completo
-        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo"/>
-      </label>
+    <section class="cta" style="margin-top: 4rem; background: linear-gradient(135deg, var(--roxo-creio), var(--roxo-claro)); color: white; padding: 3rem; border-radius: 8px; text-align: center;">
+      <h2 style="margin: 0 0 1rem; font-size: 2rem;">Pronto para emprestar?</h2>
+      <p style="margin: 0 0 1.5rem; font-size: 1.1rem;">Explore nosso catálogo e escolha o livro perfeito para sua leitura.</p>
+      <a href="pages/borrow.html" class="btn" style="background: white; color: var(--roxo-creio); font-weight: 600;">Alugar Agora</a>
+    </section>
+  </main>
 
-      <label for="livroSelect">
-        Livro
-        <select id="livroSelect" name="livro" required>
-          <option value="">Selecione um livro</option>
-        </select>
-      </label>
-
-      <label for="dias">
-        Período de empréstimo (dias)
-        <input type="number" id="dias" name="dias" min="1" max="30" value="7" required/>
-      </label>
-
-      <button type="submit">Alugar</button>
-    </form>
-    <div id="msg" role="alert" aria-live="polite"></div>
-  </section>
-
-  <section id="sobre">
-    <h2>Sobre a Biblioteca CREIO</h2>
-    <p>A Biblioteca CREIO é um projeto comunitário da Assembleia de Deus Belém - Cidade Ademar.
-       Nosso objetivo é proporcionar acesso gratuito a livros cristãos, fortalecendo a fé e o conhecimento.</p>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <p><strong>Local:</strong> Cidade Ademar - São Paulo/SP</p>
-    <p><strong>Email:</strong> contato@bibliotecacreio.org</p>
-  </section>
-
-  <footer>
-    <p>Biblioteca CREIO — Todos os direitos reservados &copy; 2025</p>
-  </footer>
-
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/home.js"></script>
 </body>
 </html>

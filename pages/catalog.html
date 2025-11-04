@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de livros cristãos - Biblioteca CREIO">
+  <title>Catálogo - Biblioteca CREIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <main class="container" style="padding: 3rem 1rem;">
+    <h1 class="page-title">Catálogo de Livros</h1>
+    <p class="page-subtitle">Explore nossa coleção de livros cristãos</p>
+
+    <div class="catalog-filters" style="margin-bottom: 2rem;">
+      <div class="filter-group">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar por título, autor ou categoria..."
+          style="max-width: 400px;"
+        >
+      </div>
+      <div class="filter-group">
+        <select id="categoryFilter" style="max-width: 200px;">
+          <option value="">Todas as categorias</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <select id="statusFilter" style="max-width: 200px;">
+          <option value="">Todos os status</option>
+          <option value="available">Disponíveis</option>
+          <option value="borrowed">Alugados</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="booksList" class="grid grid--3col" style="min-height: 400px;"></div>
+  </main>
+
+  <script type="module" src="../js/pages/catalog.js"></script>
+</body>
+</html>

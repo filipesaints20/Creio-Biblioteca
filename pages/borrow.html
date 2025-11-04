@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alugar livros - Biblioteca CREIO">
+  <title>Alugar Livro - Biblioteca CREIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <main class="container" style="padding: 3rem 1rem;">
+    <h1 class="page-title">Alugar Livro</h1>
+    <p class="page-subtitle">Preencha o formulário abaixo para alugar um livro</p>
+
+    <div style="max-width: 600px; margin: 0 auto;">
+      <div id="successMessage" class="alert alert-success" style="display: none; margin-bottom: 2rem;"></div>
+      <div id="errorMessage" class="alert alert-error" style="display: none; margin-bottom: 2rem;"></div>
+
+      <form id="borrowForm" class="form">
+        <div class="form-group">
+          <label for="borrowerName">
+            Nome Completo *
+          </label>
+          <input
+            type="text"
+            id="borrowerName"
+            name="borrowerName"
+            required
+            placeholder="Seu nome completo"
+            data-label="Nome Completo"
+            minlength="3"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="borrowerEmail">
+            Email *
+          </label>
+          <input
+            type="email"
+            id="borrowerEmail"
+            name="borrowerEmail"
+            required
+            placeholder="seu.email@exemplo.com"
+            data-label="Email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="borrowerPhone">
+            Telefone (opcional)
+          </label>
+          <input
+            type="tel"
+            id="borrowerPhone"
+            name="borrowerPhone"
+            placeholder="(XX) XXXXX-XXXX"
+            data-pattern="^\(\d{2}\)\s?\d{4,5}-?\d{4}$|^\d{10,11}$"
+            data-pattern-message="Telefone inválido"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="bookSelect">
+            Selecionar Livro *
+          </label>
+          <select id="bookSelect" name="bookSelect" required>
+            <option value="">Carregando livros disponíveis...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rentalDays">
+            Período de Empréstimo (dias) *
+          </label>
+          <input
+            type="number"
+            id="rentalDays"
+            name="rentalDays"
+            value="7"
+            min="1"
+            max="30"
+            required
+            data-label="Período de Empréstimo"
+          >
+          <small style="display: block; margin-top: 0.5rem; color: var(--cinza-escuro);">
+            Máximo de 30 dias. Você pode renovar após a devolução.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label style="display: flex; gap: 0.5rem; align-items: flex-start;">
+            <input
+              type="checkbox"
+              id="acceptTerms"
+              name="acceptTerms"
+              required
+              style="margin-top: 0.5rem; width: auto; flex-shrink: 0;"
+            >
+            <span>
+              Concordo com os <a href="../pages/about.html" style="color: var(--roxo-creio); font-weight: 600;">termos e condições</a> de empréstimo *
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+          Alugar Livro
+        </button>
+      </form>
+
+      <div id="borrowingInfo" class="card" style="margin-top: 2rem;">
+        <div class="card__body">
+          <h3 class="card__title">Informações sobre Empréstimo</h3>
+          <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+            <li>O empréstimo máximo é de 30 dias</li>
+            <li>Você pode renovar o livro uma vez</li>
+            <li>Devolva o livro em boas condições</li>
+            <li>Notificações serão enviadas por email</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/pages/borrow.js"></script>
+</body>
+</html>

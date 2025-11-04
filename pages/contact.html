@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contato - Biblioteca CREIO">
+  <title>Contato - Biblioteca CREIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <main class="container" style="padding: 3rem 1rem;">
+    <h1 class="page-title">Entre em Contato</h1>
+    <p class="page-subtitle">Envie sua mensagem e entraremos em contato em breve</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto;">
+      <div>
+        <div class="card">
+          <div class="card__body">
+            <h3 style="color: var(--roxo-creio); margin-top: 0;">Informações de Contato</h3>
+
+            <div style="margin-bottom: 2rem;">
+              <h4 style="margin: 0 0 0.5rem; color: var(--roxo-creio);">Localização</h4>
+              <p style="margin: 0;">
+                Assembleia de Deus Belém<br>
+                Cidade Ademar - São Paulo/SP
+              </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+              <h4 style="margin: 0 0 0.5rem; color: var(--roxo-creio);">Email</h4>
+              <p style="margin: 0;">
+                <a href="mailto:contato@bibliotecacreio.org" style="color: var(--roxo-creio); text-decoration: none; font-weight: 600;">
+                  contato@bibliotecacreio.org
+                </a>
+              </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+              <h4 style="margin: 0 0 0.5rem; color: var(--roxo-creio);">Horário de Funcionamento</h4>
+              <p style="margin: 0;">
+                Segunda a Sexta: 9:00 - 18:00<br>
+                Sábado: 9:00 - 13:00<br>
+                Domingo: Fechado
+              </p>
+            </div>
+
+            <div>
+              <h4 style="margin: 0 0 0.5rem; color: var(--roxo-creio);">Redes Sociais</h4>
+              <div style="display: flex; gap: 1rem;">
+                <a href="#" style="color: var(--roxo-creio); text-decoration: none; font-size: 1.5rem;">f</a>
+                <a href="#" style="color: var(--roxo-creio); text-decoration: none; font-size: 1.5rem;">i</a>
+                <a href="#" style="color: var(--roxo-creio); text-decoration: none; font-size: 1.5rem;">w</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card__body">
+            <h3 style="color: var(--roxo-creio); margin-top: 0;">Enviar Mensagem</h3>
+            <form id="contactForm" class="form" style="display: flex; flex-direction: column; gap: 1rem;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="contactName">Nome Completo *</label>
+                <input
+                  type="text"
+                  id="contactName"
+                  name="contactName"
+                  required
+                  placeholder="Seu nome"
+                  data-label="Nome Completo"
+                  minlength="3"
+                >
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="contactEmail">Email *</label>
+                <input
+                  type="email"
+                  id="contactEmail"
+                  name="contactEmail"
+                  required
+                  placeholder="seu.email@exemplo.com"
+                  data-label="Email"
+                >
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="contactSubject">Assunto *</label>
+                <input
+                  type="text"
+                  id="contactSubject"
+                  name="contactSubject"
+                  required
+                  placeholder="Assunto da mensagem"
+                  data-label="Assunto"
+                >
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="contactMessage">Mensagem *</label>
+                <textarea
+                  id="contactMessage"
+                  name="contactMessage"
+                  required
+                  placeholder="Sua mensagem..."
+                  data-label="Mensagem"
+                  minlength="10"
+                  rows="5"
+                  style="resize: vertical;"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+            <div id="formMessage" style="display: none; margin-top: 1rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/pages/contact.js"></script>
+</body>
+</html>
