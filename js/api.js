@@ -3,7 +3,7 @@
 // -----------------------------------------------------------
 // 🚨 SUA URL DO APPS SCRIPT FOI INSERIDA AQUI!
 // -----------------------------------------------------------
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7xmye4kU3IZjcXldIOif0h_ZkJOhK09hmf2qYjZE0n17RgDmKTIt3JC-MR9xC8A13KQ/exec"; 
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztjonsZlPUGCudQtk3-3kCyEpE3mmkmt159hZPp34JUxEWZhED4azetcdF7ayX6UHW_A/exec"; 
 
 class APIError extends Error {
   constructor(message, status = 500) {
