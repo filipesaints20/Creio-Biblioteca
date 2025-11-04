@@ -1,8 +1,9 @@
-// Local: src/js/pages/catalog.js - Versão CORRIGIDA para Apps Script
+// Local: src/js/pages/catalog.js - Versão CORRIGIDA FINAL
 
 import { Layout } from '../layout.js';
 import { api } from '../api.js';
-import { sanitizeHTML } from '../utils.js';
+// 🚨 CORRIGIDO: A importação agora está correta.
+import { sanitizeHTML } from '../utils.js'; 
 
 class CatalogPage {
   constructor() {
@@ -23,10 +24,10 @@ class CatalogPage {
       const booksList = document.getElementById('booksList');
       booksList.innerHTML = '<div class="loading-state"><div class="loading-state__spinner"></div></div>';
 
-      this.books = await api.fetchBooks();
+      this.books = await api.fetchBooks(); 
       this.filteredBooks = [...this.books];
 
-      // ATUALIZADO: Usar o nome da coluna do Sheets para categoria: 'Categoria'
+      // ATUALIZADO: Usar o nome da coluna do Sheets: 'Categoria'
       this.books.forEach(book => {
         if (book.Categoria) this.categories.add(book.Categoria); 
       });
@@ -35,7 +36,8 @@ class CatalogPage {
       this.renderBooks();
     } catch (error) {
       console.error('Error loading books:', error);
-      this.showError('Erro ao carregar catálogo. Tente novamente.');
+      // Aqui a mensagem de erro do Apps Script será exibida
+      this.showError(error.message || 'Erro ao carregar catálogo. Tente novamente.');
     }
   }
   
@@ -121,7 +123,7 @@ class CatalogPage {
 
 
   createBookCard(book) {
-    // ATUALIZADO: Usar Status e ID do Sheets
+    // ATUALIZADO: Usar Status, Capa, Titulo, ID do Sheets
     const isAvailable = book.Status === 'Disponível'; 
     const statusClass = isAvailable ? 'book-card__status--available' : 'book-card__status--borrowed';
     const statusText = book.Status; 
