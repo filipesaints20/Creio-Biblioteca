@@ -8,147 +8,242 @@
   <style>
     :root {
       --roxo-creio: #5B2C82;
+      --roxo-claro: #7D4DBA;
       --branco: #fff;
       --cinza: #f5f5f5;
       --cinza-escuro: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
       background: var(--cinza);
       color: var(--cinza-escuro);
     }
+
     header.hero {
-      background: var(--roxo-creio);
+      background: linear-gradient(135deg, var(--roxo-creio), var(--roxo-claro));
       color: var(--branco);
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
     }
+
     header.hero img {
-      max-height: 80px;
+      max-height: 90px;
       margin-bottom: 1rem;
     }
+
     header.hero h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin: 0;
     }
+
     header.hero p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin: 1rem 0;
     }
+
     .btn-primary {
       background: var(--branco);
       color: var(--roxo-creio);
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
       font-weight: bold;
       text-decoration: none;
-      transition: 0.3s;
+      font-size: 1rem;
+      display: inline-block;
+      margin-top: 1rem;
+      box-shadow: 0 2px 6px var(--sombra);
+      transition: all 0.3s ease;
     }
+
     .btn-primary:hover {
       background: #eee;
+      transform: scale(1.05);
     }
+
     nav.menu {
-      background: #f0f0f0;
-      padding: 0.5rem;
+      background: var(--branco);
+      box-shadow: 0 2px 4px var(--sombra);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
     nav.menu ul {
       display: flex;
       justify-content: center;
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 1rem;
     }
+
     nav.menu li {
-      margin: 0 1rem;
+      margin: 0 1.5rem;
     }
+
     nav.menu a {
       color: var(--roxo-creio);
       text-decoration: none;
       font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s;
     }
+
+    nav.menu a:hover {
+      color: var(--roxo-claro);
+    }
+
     section {
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
       max-width: 1200px;
       margin: auto;
     }
+
     section h2 {
       text-align: center;
       color: var(--roxo-creio);
+      font-size: 2rem;
+      margin-bottom: 2rem;
     }
+
     .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .category-card {
-      background: var(--branco);
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    #catalog {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
-      margin-top: 2rem;
     }
+
+    .category-card {
+      background: var(--branco);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 10px var(--sombra);
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+    }
+
+    #catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
     .book-card {
       background: var(--branco);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px var(--sombra);
       padding: 1rem;
       text-align: center;
       transition: transform 0.2s;
     }
+
     .book-card:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
+
     .book-card img {
       max-width: 100%;
       height: auto;
-      border-radius: 4px;
+      border-radius: 6px;
       margin-bottom: 1rem;
     }
+
     .book-card h3 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--roxo-creio);
       margin: 0.5rem 0;
     }
+
     .book-card p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       margin: 0.3rem 0;
     }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-width: 400px;
+      max-width: 500px;
       margin: auto;
+      background: var(--branco);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px var(--sombra);
     }
+
     input, select, button {
-      padding: 0.75rem;
+      padding: 0.9rem;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 6px;
+      font-size: 1rem;
     }
+
     button {
-      background: var(--roxo-creio);
+      background: linear-gradient(135deg, var(--roxo-creio), var(--roxo-claro));
       color: var(--branco);
       border: none;
       cursor: pointer;
       font-weight: bold;
+      transition: background 0.3s;
     }
+
     button:hover {
-      background: #472063;
+      background: var(--roxo-claro);
     }
+
+    #msg {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: green;
+    }
+
     footer {
       background: var(--roxo-creio);
       color: var(--branco);
       text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+      padding: 2rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      header.hero h1 {
+        font-size: 2rem;
+      }
+
+      header.hero p {
+        font-size: 1rem;
+      }
+
+      nav.menu ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav.menu li {
+        margin: 0.5rem 0;
+      }
+
+      .categories,
+      #catalog {
+        grid-template-columns: 1fr;
+      }
+
+      form {
+        width: 100%;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -202,6 +297,8 @@
   </section>
 
   <section id="sobre">
+    <h2>Sobre a Biblioteca CREIO</h2
+  <section id="sobre">
     <h2>Sobre a Biblioteca CREIO</h2>
     <p>A Biblioteca CREIO é um projeto comunitário da Assembleia de Deus Belém - Cidade Ademar. 
        Nosso objetivo é proporcionar acesso gratuito a livros cristãos, fortalecendo a fé e o conhecimento.</p>
@@ -223,4 +320,5 @@
   <script src="app.js"></script>
 </body>
 </html>
+
 
