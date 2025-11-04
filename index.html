@@ -3,259 +3,22 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Biblioteca CREIO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --roxo-creio: #5B2C82;
-      --roxo-claro: #7D4DBA;
-      --branco: #fff;
-      --cinza: #f5f5f5;
-      --cinza-escuro: #333;
-      --sombra: rgba(0, 0, 0, 0.1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      background: var(--cinza);
-      color: var(--cinza-escuro);
-    }
-
-    header.hero {
-      background: linear-gradient(135deg, var(--roxo-creio), var(--roxo-claro));
-      color: var(--branco);
-      text-align: center;
-      padding: 4rem 1rem;
-    }
-
-    header.hero img {
-      max-height: 90px;
-      margin-bottom: 1rem;
-    }
-
-    header.hero h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    header.hero p {
-      font-size: 1.3rem;
-      margin: 1rem 0;
-    }
-
-    .btn-primary {
-      background: var(--branco);
-      color: var(--roxo-creio);
-      padding: 0.8rem 2rem;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1rem;
-      display: inline-block;
-      margin-top: 1rem;
-      box-shadow: 0 2px 6px var(--sombra);
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background: #eee;
-      transform: scale(1.05);
-    }
-
-    nav.menu {
-      background: var(--branco);
-      box-shadow: 0 2px 4px var(--sombra);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav.menu ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      margin: 0;
-      padding: 1rem;
-    }
-
-    nav.menu li {
-      margin: 0 1.5rem;
-    }
-
-    nav.menu a {
-      color: var(--roxo-creio);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-
-    nav.menu a:hover {
-      color: var(--roxo-claro);
-    }
-
-    section {
-      padding: 3rem 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      color: var(--roxo-creio);
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .category-card {
-      background: var(--branco);
-      padding: 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 10px var(--sombra);
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: transform 0.2s;
-    }
-
-    .category-card:hover {
-      transform: translateY(-5px);
-    }
-
-    #catalog {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-    }
-
-    .book-card {
-      background: var(--branco);
-      border-radius: 10px;
-      box-shadow: 0 4px 10px var(--sombra);
-      padding: 1rem;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-
-    .book-card:hover {
-      transform: scale(1.03);
-    }
-
-    .book-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-
-    .book-card h3 {
-      font-size: 1.2rem;
-      color: var(--roxo-creio);
-      margin: 0.5rem 0;
-    }
-
-    .book-card p {
-      font-size: 0.95rem;
-      margin: 0.3rem 0;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
-      margin: auto;
-      background: var(--branco);
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px var(--sombra);
-    }
-
-    input, select, button {
-      padding: 0.9rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    button {
-      background: linear-gradient(135deg, var(--roxo-creio), var(--roxo-claro));
-      color: var(--branco);
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: var(--roxo-claro);
-    }
-
-    #msg {
-      text-align: center;
-      margin-top: 1rem;
-      font-weight: bold;
-      color: green;
-    }
-
-    footer {
-      background: var(--roxo-creio);
-      color: var(--branco);
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-      header.hero h1 {
-        font-size: 2rem;
-      }
-
-      header.hero p {
-        font-size: 1rem;
-      }
-
-      nav.menu ul {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      nav.menu li {
-        margin: 0.5rem 0;
-      }
-
-      .categories,
-      #catalog {
-        grid-template-columns: 1fr;
-      }
-
-      form {
-        width: 100%;
-        padding: 1.5rem;
-      }
-    }
-  </style>
+  <meta name="description" content="Biblioteca CREIO - Acesso gratuito a livros cristãos para fortalecer sua fé e conhecimento"/>
+  <title>Biblioteca CREIO - Assembleia de Deus Belém</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="hero">
-    <img src="logo-creio.png" alt="Logo CREIO Belém">
+    <img src="logo-creio.png" alt="Logo CREIO Belém" width="90" height="90">
     <h1>Biblioteca CREIO</h1>
-    <p>“A fé vem pelo ouvir, e o ouvir pela Palavra de Deus” — Romanos 10:17</p>
+    <p>"A fé vem pelo ouvir, e o ouvir pela Palavra de Deus" — Romanos 10:17</p>
     <a href="#emprestar" class="btn-primary">Alugar agora</a>
   </header>
 
-  <nav class="menu">
+  <nav class="menu" role="navigation" aria-label="Menu principal">
     <ul>
       <li><a href="#catalogo">Catálogo</a></li>
       <li><a href="#categorias">Categorias</a></li>
@@ -276,49 +39,50 @@
 
   <section id="catalogo">
     <h2>Catálogo de Livros</h2>
-    <div id="catalog"></div>
+    <div id="catalog" role="list"></div>
   </section>
 
   <section id="emprestar">
     <h2>Alugar Livro</h2>
     <form id="borrowForm">
-      <label>Nome:
-        <input type="text" id="nome" required/>
+      <label for="nome">
+        Nome completo
+        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo"/>
       </label>
-      <label>Livro (ID):
-        <select id="livroSelect" required></select>
+
+      <label for="livroSelect">
+        Livro
+        <select id="livroSelect" name="livro" required>
+          <option value="">Selecione um livro</option>
+        </select>
       </label>
-      <label>Dias:
-        <input type="number" id="dias" min="1" value="7" required/>
+
+      <label for="dias">
+        Período de empréstimo (dias)
+        <input type="number" id="dias" name="dias" min="1" max="30" value="7" required/>
       </label>
+
       <button type="submit">Alugar</button>
     </form>
-    <div id="msg"></div>
+    <div id="msg" role="alert" aria-live="polite"></div>
   </section>
 
   <section id="sobre">
-    <h2>Sobre a Biblioteca CREIO</h2
-  <section id="sobre">
     <h2>Sobre a Biblioteca CREIO</h2>
-    <p>A Biblioteca CREIO é um projeto comunitário da Assembleia de Deus Belém - Cidade Ademar. 
+    <p>A Biblioteca CREIO é um projeto comunitário da Assembleia de Deus Belém - Cidade Ademar.
        Nosso objetivo é proporcionar acesso gratuito a livros cristãos, fortalecendo a fé e o conhecimento.</p>
   </section>
 
   <section id="contato">
     <h2>Contato</h2>
-    <p>📍 Local: Cidade Ademar - São Paulo/SP</p>
-    <p>📧 Email: contato@bibliotecacreio.org</p>
+    <p><strong>Local:</strong> Cidade Ademar - São Paulo/SP</p>
+    <p><strong>Email:</strong> contato@bibliotecacreio.org</p>
   </section>
 
   <footer>
-    <p>Biblioteca CREIO — Todos os direitos reservados © 2025</p>
+    <p>Biblioteca CREIO — Todos os direitos reservados &copy; 2025</p>
   </footer>
 
-  <script>
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz4nmVqCu4DWmJJfiTEN6_FSP51xUOw9wV1z-U9AX7OG8bMks0cCDtnxOJizng0xu8ryA/exec";
-  </script>
-  <script src="app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
-
-
