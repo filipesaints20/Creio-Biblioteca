@@ -1,69 +1,56 @@
-import { CONFIG } from './config.js';
+// Local: src/js/api.js
 
-class APIError extends Error {
-  constructor(message, status) {
-    super(message);
-    this.name = 'APIError';
-    this.status = status;
-  }
+// SUBSTITUA ESTA STRING PELA URL COMPLETA DO SEU APP DA WEB APÓS A PUBLICAÇÃO.
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYF0K3l6GYNIO21m9wH-sozMXFjEr0iWoq2FenJkRv4mvkr8jvBM9Gy6v04oMIF_OUWA/exec;" 
+
+
+/**
+ * Função genérica para interagir com a API do Google Apps Script.
+ * @param {string} action - A ação desejada (ex: 'alugar', 'devolver', 'getLivros').
+ * @param {object} [data=null] - Dados a serem enviados no corpo (POST).
+ * @param {string} [method='GET'] - Método HTTP (GET ou POST).
+ */
+export async function callAppsScript(action, data = null, method = 'GET') {
+    let url = APPS_SCRIPT_URL;
+    let options = { method: method };
+
+    if (method === 'GET') {
+        url += `?action=${action}`;
+    } else if (method === 'POST') {
+        options.body = JSON.stringify({ action: action, ...data });
+        options.headers = {
+            'Content-Type': 'application/json'
+        };
+    }
+    
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        
+        return await response.json();
+
+    } catch (error) {
+        console.error("Erro na comunicação com o Apps Script:", error);
+        return { status: 'erro', mensagem: 'Falha na conexão com o servidor da biblioteca.' };
+    }
 }
 
-export const api = {
-  async fetchBooks() {
-    try {
-      const response = await fetch(CONFIG.API_URL, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+// -----------------------------------------------------------
+// Funções de Ação específicas para facilitar o uso no frontend
+// -----------------------------------------------------------
 
-      if (!response.ok) {
-        throw new APIError(`HTTP error! status: ${response.status}`, response.status);
-      }
+export function getCatalog() {
+    return callAppsScript('getLivros', null, 'GET');
+}
 
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching books:', error);
-      throw error;
-    }
-  },
+export function borrowBook(data) {
+    // data deve conter {livroID, nome}
+    return callAppsScript('alugar', data, 'POST');
+}
 
-  async borrowBook(bookId, userName, days) {
-    if (!bookId || !userName || !days) {
-      throw new Error('Missing required parameters');
-    }
-
-    try {
-      const response = await fetch(CONFIG.API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          action: 'borrow',
-          id: bookId,
-          nome: userName,
-          dias: parseInt(days, 10)
-        })
-      });
-
-      if (!response.ok) {
-        throw new APIError(`HTTP error! status: ${response.status}`, response.status);
-      }
-
-      const result = await response.json();
-
-      if (!result.success) {
-        throw new Error(result.error || 'Unknown error occurred');
-      }
-
-      return result;
-    } catch (error) {
-      console.error('Error borrowing book:', error);
-      throw error;
-    }
-  }
-};
+export function returnBook(data) {
+    // data deve conter {livroID}
+    return callAppsScript('devolver', data, 'POST');
+}
