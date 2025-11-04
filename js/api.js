@@ -1,16 +1,20 @@
 // Local: src/js/api.js
 
-// SUBSTITUA ESTA STRING PELA URL COMPLETA DO SEU APP DA WEB APÓS A PUBLICAÇÃO.
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYF0K3l6GYNIO21m9wH-sozMXFjEr0iWoq2FenJkRv4mvkr8jvBM9Gy6v04oMIF_OUWA/exec;" 
+// -----------------------------------------------------------
+// 🚨 SUA URL DO APPS SCRIPT FOI INSERIDA AQUI!
+// -----------------------------------------------------------
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvGfcaaVMlnWfeC50CM11tlfYPaX2QiFQRGkxRWZddPTCf7B-YKhONwOzpX2Tv4l-8RA/exec"; 
 
+class APIError extends Error {
+  constructor(message, status = 500) {
+    super(message);
+    this.name = 'APIError';
+    this.status = status;
+  }
+}
 
-/**
- * Função genérica para interagir com a API do Google Apps Script.
- * @param {string} action - A ação desejada (ex: 'alugar', 'devolver', 'getLivros').
- * @param {object} [data=null] - Dados a serem enviados no corpo (POST).
- * @param {string} [method='GET'] - Método HTTP (GET ou POST).
- */
-export async function callAppsScript(action, data = null, method = 'GET') {
+// Função utilitária genérica para Apps Script
+async function callAppsScript(action, data = null, method = 'GET') {
     let url = APPS_SCRIPT_URL;
     let options = { method: method };
 
@@ -19,38 +23,61 @@ export async function callAppsScript(action, data = null, method = 'GET') {
     } else if (method === 'POST') {
         options.body = JSON.stringify({ action: action, ...data });
         options.headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         };
     }
-    
+
     try {
         const response = await fetch(url, options);
+        
         if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
+            throw new APIError(`Erro de rede: ${response.status}`, response.status);
+        }
+
+        const result = await response.json();
+        
+        if (result.status !== 'sucesso') {
+             // Lança a mensagem de erro que vem do Apps Script
+             throw new APIError(result.mensagem || 'Erro desconhecido da API.', 500);
         }
         
-        return await response.json();
+        return result;
 
     } catch (error) {
         console.error("Erro na comunicação com o Apps Script:", error);
-        return { status: 'erro', mensagem: 'Falha na conexão com o servidor da biblioteca.' };
+        throw error; // Lança o erro para ser pego nos arquivos de página
     }
 }
 
-// -----------------------------------------------------------
-// Funções de Ação específicas para facilitar o uso no frontend
-// -----------------------------------------------------------
 
-export function getCatalog() {
-    return callAppsScript('getLivros', null, 'GET');
-}
+export const api = {
+  // Busca todos os livros
+  async fetchBooks() {
+    const result = await callAppsScript('getLivros', null, 'GET');
+    // Retorna a array de dados
+    return result.dados; 
+  },
 
-export function borrowBook(data) {
-    // data deve conter {livroID, nome}
-    return callAppsScript('alugar', data, 'POST');
-}
-
-export function returnBook(data) {
-    // data deve conter {livroID}
-    return callAppsScript('devolver', data, 'POST');
-}
+  // Registra um empréstimo
+  async borrowBook(bookId, userName, days) {
+    // Ação: 'alugar'. O Apps Script só precisa de livroID e nome.
+    // O retorno será { status: 'sucesso', mensagem: 'Livro alugado...' }
+    return await callAppsScript('alugar', { livroID: bookId, nome: userName }, 'POST');
+  },
+  
+  // Busca lista de categorias
+  async getCategories() {
+    const result = await callAppsScript('getCategorias', null, 'GET');
+    // Retorna a array de dados (espera-se que sejam as categorias)
+    return result.dados; 
+  },
+  
+  // *DICA: Se você tiver formulário de Contato, pode ser integrado aqui:*
+  /*
+  async submitContact(data) {
+    // Exemplo de como enviar dados de contato para o Apps Script
+    return await callAppsScript('contato', data, 'POST');
+  }
+  */
+};

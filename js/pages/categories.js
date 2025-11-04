@@ -1,96 +1,31 @@
-import { Layout } from '../layout.js';
-import { api } from '../api.js';
-import { sanitizeHTML } from '../utils.js';
+/**
+ * [GET] Busca todas as categorias únicas e conta quantos livros há em cada.
+ */
+function getCategorias() {
+  var aba = SpreadsheetApp.openById(SHEET_ID).getSheetByName(ABA_LIVROS);
+  var range = aba.getRange(2, 1, aba.getLastRow() - 1, aba.getLastColumn());
+  var values = range.getValues();
+  
+  // Índice da coluna 'Categoria' (assumindo que seja a 3ª coluna, se Titulo=2, Autor=3)
+  // AJUSTE ESTE ÍNDICE se a coluna Categoria não for a 3ª.
+  var COL_CATEGORIA = 3; 
 
-class CategoriesPage {
-  constructor() {
-    this.categories = [];
-    this.init();
-  }
-
-  async init() {
-    Layout.initializeDOM('#app', 'categories');
-    await this.loadCategories();
-  }
-
-  async loadCategories() {
-    try {
-      const list = document.getElementById('categoriesList');
-      list.innerHTML = '<div class="loading-state"><div class="loading-state__spinner"></div></div>';
-
-      this.categories = await api.getCategories();
-      this.renderCategories();
-    } catch (error) {
-      console.error('Error loading categories:', error);
-      this.showError('Erro ao carregar categorias. Tente novamente.');
+  var categoryCounts = {};
+  
+  for (var i = 0; i < values.length; i++) {
+    // O valor da categoria estará na posição COL_CATEGORIA - 1 (por ser array base 0)
+    var categoria = values[i][COL_CATEGORIA - 1]; 
+    if (categoria && categoria.toString().trim() !== "") {
+      var categoryName = categoria.toString().trim();
+      categoryCounts[categoryName] = (categoryCounts[categoryName] || 0) + 1;
     }
   }
-
-  renderCategories() {
-    const list = document.getElementById('categoriesList');
-
-    if (this.categories.length === 0) {
-      list.innerHTML = `
-        <div style="grid-column: 1 / -1;">
-          <div class="empty-state">
-            <div class="empty-state__icon">📁</div>
-            <h3 class="empty-state__title">Nenhuma categoria encontrada</h3>
-          </div>
-        </div>
-      `;
-      return;
-    }
-
-    const fragment = document.createDocumentFragment();
-
-    this.categories.forEach(category => {
-      const card = document.createElement('a');
-      card.href = `../pages/catalog.html?category=${encodeURIComponent(category.name)}`;
-      card.className = 'category-card';
-      card.style.textDecoration = 'none';
-      card.style.color = 'inherit';
-
-      const icon = this.getCategoryIcon(category.name);
-
-      card.innerHTML = `
-        <div class="category-card__icon">${icon}</div>
-        <h3 class="category-card__title">${sanitizeHTML(category.name)}</h3>
-        <p class="category-card__count">${category.book_count || 0} livros</p>
-      `;
-
-      fragment.appendChild(card);
-    });
-
-    list.innerHTML = '';
-    list.appendChild(fragment);
-  }
-
-  getCategoryIcon(categoryName) {
-    const icons = {
-      'Literatura Cristã': '📖',
-      'Devocionais': '🙏',
-      'Teologia': '✝️',
-      'Infantil': '👶',
-      'Biografias': '👤',
-      'Comentários Bíblicos': '📚',
-      'Espiritual': '✨'
-    };
-
-    return icons[categoryName] || '📖';
-  }
-
-  showError(message) {
-    const list = document.getElementById('categoriesList');
-    list.innerHTML = `
-      <div style="grid-column: 1 / -1;">
-        <div class="alert alert-error">
-          ${sanitizeHTML(message)}
-        </div>
-      </div>
-    `;
-  }
+  
+  // Converte o objeto de contagem para o formato que seu frontend espera: [{ name: '...', book_count: X }, ...]
+  var categoriasArray = Object.keys(categoryCounts).map(name => ({
+    name: name,
+    book_count: categoryCounts[name]
+  }));
+  
+  return { "status": "sucesso", "dados": categoriasArray };
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  new CategoriesPage();
-});
